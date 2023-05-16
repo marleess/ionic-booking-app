@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {NavController} from "@ionic/angular";
+import {ModalController, NavController} from "@ionic/angular";
 import {PlacesService} from "../../../services/places.service";
 import {PlaceModel} from "../../../models/place.model";
+import {CreateBookingComponent} from "../../../bookings/create-booking/create-booking.component";
 
 @Component({
   selector: 'app-place-detail',
@@ -15,7 +16,8 @@ export class PlaceDetailPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private placesService: PlacesService
+    private placesService: PlacesService,
+    private modalController: ModalController,
   ) {
   }
 
@@ -34,6 +36,21 @@ export class PlaceDetailPage implements OnInit {
 
   onBookPlace() {
     // this.router.navigateByUrl('/places/tabs/discover');
-    this.navCtrl.navigateBack('/places/tabs/discover')
+    // this.navCtrl.navigateBack('/places/tabs/discover');
+    this.modalController
+      .create({
+        component: CreateBookingComponent,
+        componentProps: {selectedPlace: this.place},
+      })
+      .then(modalEl => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      })
+      .then(resData => {
+        console.log(resData.data, resData.role);
+        if (resData.role === 'confirm') {
+          console.log('BOOKED!')
+        }
+      })
   }
 }
