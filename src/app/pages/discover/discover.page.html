@@ -8,6 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-segment value="all" (ionChange)="onFilterUpdate($event)">
+    <ion-segment-button value="all">All Places</ion-segment-button>
+    <ion-segment-button value="bookable">Bookable Places</ion-segment-button>
+  </ion-segment>
 
   <ion-grid>
     <ion-row>
@@ -24,7 +28,8 @@
 
           <div class="ion-text-right ion-padding">
             <ion-button fill="clear" color="primary"
-                        [routerLink]="['/', 'places', 'tabs', 'discover', loadedPlaces[0].id]" mode="ios">More detail...</ion-button>
+                        [routerLink]="['/', 'places', 'tabs', 'discover', loadedPlaces[0].id]" mode="ios">More detail...
+            </ion-button>
           </div>
 
         </ion-card>
@@ -33,17 +38,20 @@
 
     <ion-row>
       <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let place of loadedPlaces.slice(1)" [routerLink]="['/', 'places', 'tabs', 'discover', loadedPlaces[0].id]" detail="">
-            <ion-thumbnail slot="start">
-              <ion-img [src]="place.imageUrl"></ion-img>
-            </ion-thumbnail>
-            <ion-label>
-              <h2>{{place.title}}</h2>
-              <p>{{place.description}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+        <cdk-virtual-scroll-viewport itemSize="56">
+          <ion-list>
+            <ion-item *cdkVirtualFor="let place of listedLoadedPlaces"
+                      [routerLink]="['/', 'places', 'tabs', 'discover', loadedPlaces[0].id]" detail="">
+              <ion-thumbnail slot="start">
+                <ion-img [src]="place.imageUrl"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{place.title}}</h2>
+                <p>{{place.description}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </cdk-virtual-scroll-viewport>
       </ion-col>
     </ion-row>
   </ion-grid>
