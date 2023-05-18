@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ModalController, NavController} from "@ionic/angular";
-import {PlacesService} from "../../../services/places.service";
-import {PlaceModel} from "../../../models/place.model";
-import {CreateBookingComponent} from "../../../bookings/create-booking/create-booking.component";
+import {PlacesService} from "../../services/places.service";
+import {PlaceModel} from "../../models/place.model";
+import {CreateBookingComponent} from "../create-booking/create-booking.component";
 
 @Component({
   selector: 'app-place-detail',

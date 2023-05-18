@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "./auth/auth.guard";
+import {AuthGuard} from "./guard/auth.guard";
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -14,16 +14,16 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule)
   },
   {
     path: 'places',
-    loadChildren: () => import('./places/places.module').then( m => m.PlacesPageModule),
+    loadChildren: () => import('./pages/places/places.module').then(m => m.PlacesPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'bookings',
-    loadChildren: () => import('./bookings/bookings.module').then( m => m.BookingsPageModule),
+    loadChildren: () => import('./pages/bookings/bookings.module').then(m => m.BookingsPageModule),
     canLoad: [AuthGuard]
   },
 ];

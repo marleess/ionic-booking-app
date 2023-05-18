@@ -1,23 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {PlaceModel} from "../../../models/place.model";
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {NavController} from "@ionic/angular";
-import {PlacesService} from "../../../services/places.service";
+import {PlacesService} from "../../services/places.service";
+import {PlaceModel} from "../../models/place.model";
 
 @Component({
-  selector: 'app-offer-bookings',
-  templateUrl: './offer-bookings.page.html',
-  styleUrls: ['./offer-bookings.page.scss'],
+  selector: 'app-edit-offer',
+  templateUrl: './edit-offer.page.html',
+  styleUrls: ['./edit-offer.page.scss'],
 })
-export class OfferBookingsPage implements OnInit {
+export class EditOfferPage implements OnInit {
   place: PlaceModel;
 
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private placesService: PlacesService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
