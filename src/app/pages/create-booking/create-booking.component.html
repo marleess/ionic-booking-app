@@ -10,6 +10,49 @@
 </ion-header>
 
 <ion-content class="ion-text-center ion-padding">
-  <p>{{selectedPlace.description}}</p>
-  <ion-button color="primary" (click)="onBookPlace()">Book!</ion-button>
+  <form #f="ngForm" (ngSubmit)="onBookPlace()">
+    <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input label="Name" labelPlacement="floating" name="name" required="" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-select [ngModel]="'2'" aria-label="Fruit" interface="popover" name="guest-number"
+                        placeholder="Number of Guest">
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+            </ion-select>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input [ngModel]="startDate" label="From" labelPlacement="stacked" name="date-from" required=""
+                       type="date"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input [ngModel]="endDate" label="From" labelPlacement="stacked" name="date-to" required=""
+                       type="date"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="onBookPlace()" color="primary">Book!</ion-button>
+  </form>
 </ion-content>

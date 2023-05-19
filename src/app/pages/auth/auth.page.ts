@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {LoadingController} from "@ionic/angular";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-auth',
@@ -10,8 +11,10 @@ import {LoadingController} from "@ionic/angular";
 })
 export class AuthPage implements OnInit {
 
-  isLoading = false;
-  email: string;
+  protected isLogin = true;
+  protected isLoading = false;
+  protected email: string;
+  protected password: string;
 
   constructor(
     private authService: AuthService,
@@ -40,6 +43,26 @@ export class AuthPage implements OnInit {
         this.router.navigateByUrl("/places/tabs/discover")
       }, 1000)
     });
+  }
+
+  onSwitchAuthMode() {
+    this.isLogin = !this.isLogin;
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    this.email = form.value.email;
+    this.password = form.value.password
+
+    console.log(this.email, this.password)
+
+    if (this.isLogin) {
+      //
+    } else {
+      //
+    }
   }
 
 }

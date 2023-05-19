@@ -1,15 +1,26 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
-    </ion-card-header>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{isLogin ? 'Login' : 'Signup'}}</ion-card-title>
+      </ion-card-header>
 
-    <ion-card-content>
-      <ion-input label="Email" labelPlacement="floating" fill="outline" placeholder="example@gmail.com"
-                 [(ngModel)]="email"></ion-input>
+      <ion-card-content>
+        <ion-input [(ngModel)]="email" class="ion-margin-bottom" email errorText="Invalid email" fill="outline"
+                   label="Email" labelPlacement="floating" name="email" placeholder="example@gmail.com"
+                   required="" type="email"></ion-input>
 
-      <ion-button (click)="onLogin()">Login</ion-button>
-    </ion-card-content>
-  </ion-card>
+        <ion-input [(ngModel)]="password" class="ion-margin-bottom" errorText="Must be at least 8 characters long" fill="outline" label="Password"
+                   labelPlacement="floating" minLength="8" name="password" placeholder="password"
+                   required="" type="password"></ion-input>
+        <ion-buttons>
+          <ion-button (click)="onSwitchAuthMode()" color="primary" fill="clear" mode="ios" type="button">Switch
+            to {{isLogin ? 'Signup' : 'Login'}}</ion-button>
+          <ion-button (click)="onLogin()" [disabled]="!f.valid" color="primary" fill="solid" mode="ios"
+                      type="submit">{{isLogin ? 'Signup' : 'Login'}}</ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>
